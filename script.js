@@ -605,19 +605,43 @@ const provinceData = {
             {
                 name: "Zafer Gazozu",
                 info: "Ege bölgesiyle özdeşleşmiş, çocukluğun nostaljik tadı, Denizli'nin yerel efsane gazozu."
-            },
+            }
+        ]
+    },
+    "Tavas": {
+        writers: [],
+        products: [
             {
                 name: "Tavas Pidesi",
                 info: "Tavas ilçesine has, özel hamuru, kıymalı-kaşarlı harcı ve yanında servis edilen turşusuyla damaklarda iz bırakan tescilli lezzet."
-            },
+            }
+        ]
+    },
+    "Çal": {
+        writers: [],
+        products: [
             {
                 name: "Çal Karası Üzümü",
                 info: "Çal ilçesinin bereketli bağlarında yetişen, hem sofralık hem de şaraplık/pekmezlik olarak kullanılan dünyaca ünlü siyah üzüm."
             },
             {
+                name: "Çal Koyunu",
+                info: "Bölgeye özgü, süt ve et verimi yüksek, yöre insanının önemli geçim kaynaklarından olan koyun ırkı."
+            }
+        ]
+    },
+    "Çardak": {
+        writers: [],
+        products: [
+            {
                 name: "Hanabat Kervansarayı",
                 info: "Çardak ilçesinde bulunan, Selçuklu döneminden (1230) günümüze ulaşan, İpek Yolu üzerindeki görkemli tarihi yapı."
-            },
+            }
+        ]
+    },
+    "Bozkurt": {
+        writers: [],
+        products: [
             {
                 name: "Bozkurt (Hambat) Kapaması",
                 info: "Bozkurt ilçesine özgü; kuzu eti, pirinç ve baharatların fırında ağır ağır pişmesiyle yapılan, düğünlerin vazgeçilmez yemeği."
@@ -686,6 +710,14 @@ const cityCoordinates = [
     { name: "Uşak", lat: 38.6823, lng: 29.4082 },
     { name: "Denizli", lat: 37.7765, lng: 29.0864 },
     { name: "Aydın", lat: 37.8444, lng: 27.8458 }
+];
+
+// District Coordinates for Denizli (Hidden by default, shown on zoom)
+const denizliDistricts = [
+    { name: "Tavas", lat: 37.5739, lng: 29.0706 },
+    { name: "Çal", lat: 37.9312, lng: 29.4042 },
+    { name: "Çardak", lat: 37.8286, lng: 29.6631 },
+    { name: "Bozkurt", lat: 37.8242, lng: 29.6083 } // Bozkurt is very close to Çardak
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -816,4 +848,56 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
         map.invalidateSize();
     }, 100);
+
+    // District Markers Management
+    const districtMarkers = [];
+
+    // Function to create district markers
+    function createDistrictMarkers() {
+        denizliDistricts.forEach(district => {
+            const marker = L.circleMarker([district.lat, district.lng], {
+                radius: 8,
+                fillColor: "#e67e22", // Different color for districts (Orange)
+                color: "#fff",
+                weight: 2,
+                opacity: 1,
+                fillOpacity: 0.9
+            });
+
+            marker.bindTooltip(district.name, {
+                permanent: true, // Always show name for districts when visible
+                direction: 'top',
+                className: 'district-tooltip'
+            });
+
+            marker.on('click', () => {
+                openModal(district.name);
+            });
+
+            districtMarkers.push(marker);
+        });
+    }
+
+    createDistrictMarkers();
+
+    // Zoom event to toggle district markers
+    map.on('zoomend', () => {
+        const currentZoom = map.getZoom();
+
+        // Show districts if zoom level is 9 or higher (zoomed in)
+        // Denizli is around zoom 6-7 usually, so 9 requires user to zoom in
+        if (currentZoom >= 9) {
+            districtMarkers.forEach(marker => {
+                if (!map.hasLayer(marker)) {
+                    marker.addTo(map);
+                }
+            });
+        } else {
+            districtMarkers.forEach(marker => {
+                if (map.hasLayer(marker)) {
+                    marker.remove();
+                }
+            });
+        }
+    });
 });
