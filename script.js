@@ -595,6 +595,40 @@ const provinceData = {
                 info: "Ege bölgesiyle özdeşleşmiş, çocukluğun nostaljik tadı, Denizli'nin yerel efsane gazozu."
             }
         ]
+    },
+    "Aydın": {
+        writers: [
+            {
+                name: "Tuncel Kurtiz",
+                info: "Ünlü sinema ve tiyatro oyuncusu, yönetmen, yapımcı ve senarist. Çocukluğunun bir kısmı Aydın'da geçmiş, son yıllarını Kaz Dağları eteklerinde geçirmiş ve hayatı doğayla iç içe yaşamıştır."
+            },
+            {
+                name: "Adnan Menderes",
+                info: "Siyasetçi ve devlet adamı. Aydınlı bir ailenin çocuğu olarak demokrasi tarihimizde önemli bir yer edinmiş, adına üniversite kurulmuş bir liderdir."
+            },
+            {
+                name: "Ahmet Hamdi",
+                info: "'Aydınlı Ahmet' olarak da bilinir. 14. yüzyılda yaşamış, tıp alanında eserler vermiş önemli bir hekimdir."
+            }
+        ],
+        products: [
+            {
+                name: "Aydın İnciri",
+                info: "Dünyanın en kaliteli kuru inciri olarak kabul edilen, AB coğrafi işaretli, 'Sarı Lop' cinsiyle meşhur, şifa kaynağı bir meyvedir."
+            },
+            {
+                name: "Zeytinyağı",
+                info: "Ege'nin bereketli topraklarından elde edilen, asit oranı düşük, nefis aromalı ve yüksek kaliteli zeytinyağları."
+            },
+            {
+                name: "Çine Köftesi",
+                info: "Az ekmekli, bol etli, kendine has baharatlarıyla yoğrulan ve genellikle soğanla servis edilen, Aydın'ın Çine ilçesine özgü meşhur köfte."
+            },
+            {
+                name: "Paşa Böreği",
+                info: "El açması yufkaların et suyuyla ıslatılıp arasına kıymalı harç konularak kat kat döşenmesiyle yapılan, üzerine yoğurt dökülen yöresel lezzet."
+            }
+        ]
     }
 };
 
@@ -621,7 +655,9 @@ const cityCoordinates = [
     { name: "Kütahya", lat: 39.4167, lng: 29.9833 },
     { name: "Afyonkarahisar", lat: 38.7507, lng: 30.5567 },
     { name: "Uşak", lat: 38.6823, lng: 29.4082 },
-    { name: "Denizli", lat: 37.7765, lng: 29.0864 }
+    { name: "Uşak", lat: 38.6823, lng: 29.4082 },
+    { name: "Denizli", lat: 37.7765, lng: 29.0864 },
+    { name: "Aydın", lat: 37.8444, lng: 27.8458 }
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
